@@ -1,8 +1,13 @@
 "use client";
 
-import { NextUIProvider } from "@nextui-org/react";
 import { PropsWithChildren } from "react";
+import { NextUIProvider } from "@nextui-org/react";
+import { SessionProvider } from "next-auth/react";
 
 export function Providers({ children }: PropsWithChildren) {
-  return <NextUIProvider>{children}</NextUIProvider>;
+  return (
+    <SessionProvider>
+      <NextUIProvider>{children}</NextUIProvider>
+    </SessionProvider>
+  );
 }
