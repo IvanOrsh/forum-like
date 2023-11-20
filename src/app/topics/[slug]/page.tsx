@@ -6,7 +6,7 @@ type TopicPageProps = {
   };
 };
 
-export default async function PostPage({ params }: TopicPageProps) {
+export default async function TopicPage({ params }: TopicPageProps) {
   const { slug } = params;
 
   return (
