@@ -1,12 +1,8 @@
-import { auth } from "@/auth";
-import Profile from "@/components/Profile";
-
-export default async function Home() {
-  const session = await auth();
+export default function Home() {
   return (
     <>
       <main>
-        <Profile />
+        <div>Home Page</div>
       </main>
     </>
   );
