@@ -25,10 +25,10 @@ export const {
     }),
   ],
   callbacks: {
-    async session({ session, user }: any) {
+    async session({ session, user }) {
       // Usually not needed, here we are fixing a bug in nextauth
       if (session && user) {
-        session.user.id = user.id; // currently, no id
+        session.user!.id = user.id; // currently, no id
       }
 
       return session;
