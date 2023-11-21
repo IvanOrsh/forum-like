@@ -1,8 +1,9 @@
 import Link from "next/link";
 
-import { db } from "@/db";
 import paths from "@/paths";
 import Post from "@/components/posts/Post";
+import CommentCreateForm from "@/components/comments/CommentCreateForm";
+import CommentList from "@/components/comments/CommentList";
 
 type PostPageProps = {
   params: {
@@ -20,8 +21,9 @@ export default async function PostPage({ params }: PostPageProps) {
         {"< "}Back to {slug}
       </Link>
       <Post postId={postId} />
-      {/* CommentCreateForm */}
-      {/* CommentList */}
+
+      <CommentCreateForm postId={postId} startOpen />
+      <CommentList postId={postId} />
     </div>
   );
 }
