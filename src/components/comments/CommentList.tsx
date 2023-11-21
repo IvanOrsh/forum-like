@@ -1,19 +1,13 @@
+import { CommentWithAuthor } from "@/db/queries/comments";
 import Comment from "./Comment";
 import { db } from "@/db";
 
 type CommentListProps = {
-  postId: string;
+  fetchData: () => Promise<CommentWithAuthor[]>;
 };
 
-export default async function CommentList({ postId }: CommentListProps) {
-  const comments = await db.comment.findMany({
-    where: {
-      postId,
-    },
-    include: {
-      user: true,
-    },
-  });
+export default async function CommentList({ fetchData }: CommentListProps) {
+  const comments = await fetchData();
 
   if (!comments) {
     return (

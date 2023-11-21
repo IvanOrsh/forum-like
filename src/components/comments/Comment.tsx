@@ -2,11 +2,12 @@ import Image from "next/image";
 import { Button } from "@nextui-org/react";
 
 import CommentCreateForm from "./CommentCreateForm";
-import { Comment, User } from "@prisma/client";
+import { Comment } from "@prisma/client";
+import { CommentWithAuthor } from "@/db/queries/comments";
 
 type CommentProps = {
   commentId: string;
-  comments: (Comment & { user: User })[];
+  comments: CommentWithAuthor[];
 };
 
 export default async function Comment({ commentId, comments }: CommentProps) {
@@ -16,7 +17,7 @@ export default async function Comment({ commentId, comments }: CommentProps) {
     return null;
   }
 
-  // find parent
+  // find children
   const children = comments.filter((c) => c.parentId === commentId);
   const renderedChildren = children.map((child) => {
     return <Comment key={child.id} commentId={child.id} comments={comments} />;

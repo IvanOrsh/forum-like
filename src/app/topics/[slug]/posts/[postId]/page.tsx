@@ -4,6 +4,7 @@ import paths from "@/paths";
 import Post from "@/components/posts/Post";
 import CommentCreateForm from "@/components/comments/CommentCreateForm";
 import CommentList from "@/components/comments/CommentList";
+import { fetchCommentsByPostId } from "@/db/queries/comments";
 
 type PostPageProps = {
   params: {
@@ -23,7 +24,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <Post postId={postId} />
 
       <CommentCreateForm postId={postId} startOpen />
-      <CommentList postId={postId} />
+      <CommentList fetchData={() => fetchCommentsByPostId(postId)} />
     </div>
   );
 }
