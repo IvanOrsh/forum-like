@@ -1,5 +1,6 @@
 import PostCreateForm from "@/components/posts/PostCreateForm";
 import PostList from "@/components/posts/PostList";
+import { fetchPostsByTopicSlug } from "@/db/queries/posts";
 
 type TopicPageProps = {
   params: {
@@ -15,7 +16,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
       <div className="col-span-3">
         <h1 className="text-2xl font-bold mb-2">{slug}</h1>
 
-        <PostList slug={slug} />
+        <PostList fetchData={() => fetchPostsByTopicSlug(slug)} />
       </div>
 
       <div>
