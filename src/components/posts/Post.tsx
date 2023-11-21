@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { db } from "@/db";
 
 type PostProps = {
@@ -12,11 +14,7 @@ export default async function Post({ postId }: PostProps) {
   });
 
   if (!post) {
-    return (
-      <div className="m-4">
-        <h1>Post not found</h1>
-      </div>
-    );
+    notFound();
   }
 
   return (
