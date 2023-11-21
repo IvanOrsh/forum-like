@@ -95,7 +95,7 @@ model Comment {
   content String
   postId String
   userId String
-  parentId String
+  parentId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
