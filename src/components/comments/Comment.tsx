@@ -4,13 +4,16 @@ import { Button } from "@nextui-org/react";
 import CommentCreateForm from "./CommentCreateForm";
 import { Comment } from "@prisma/client";
 import { CommentWithAuthor } from "@/db/queries/comments";
+import { fetchCommentsByPostId } from "@/db/queries/comments";
 
 type CommentProps = {
   commentId: string;
-  comments: CommentWithAuthor[];
+  postId: string;
 };
 
-export default async function Comment({ commentId, comments }: CommentProps) {
+export default async function Comment({ commentId, postId }: CommentProps) {
+  const comments = await fetchCommentsByPostId(postId);
+
   const comment = comments.find((c) => c.id === commentId);
 
   if (!comment) {
@@ -20,7 +23,7 @@ export default async function Comment({ commentId, comments }: CommentProps) {
   // find children
   const children = comments.filter((c) => c.parentId === commentId);
   const renderedChildren = children.map((child) => {
-    return <Comment key={child.id} commentId={child.id} comments={comments} />;
+    return <Comment key={child.id} commentId={child.id} postId={postId} />;
   });
 
   return (
