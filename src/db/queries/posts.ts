@@ -35,3 +35,25 @@ export function fetchPostsByTopicSlug(
     },
   });
 }
+
+export function fetchTopPosts(): Promise<PostWithData[]> {
+  return db.post.findMany({
+    orderBy: [
+      {
+        comments: {
+          _count: "desc",
+        },
+      },
+    ],
+    include: {
+      topic: true,
+      user: true,
+      _count: {
+        select: {
+          comments: true,
+        },
+      },
+    },
+    take: 5,
+  });
+}

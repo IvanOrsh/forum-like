@@ -7,8 +7,6 @@ type PostProps = {
 };
 
 export default async function Post({ postId }: PostProps) {
-  await new Promise((r) => setTimeout(r, 2500));
-
   const post = await db.post.findFirst({
     where: {
       id: postId,
