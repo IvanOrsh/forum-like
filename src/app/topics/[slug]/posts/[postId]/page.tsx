@@ -1,10 +1,10 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
 import paths from "@/paths";
 import Post from "@/components/posts/Post";
 import CommentCreateForm from "@/components/comments/CommentCreateForm";
 import CommentList from "@/components/comments/CommentList";
-import { fetchCommentsByPostId } from "@/db/queries/comments";
 
 type PostPageProps = {
   params: {
@@ -21,7 +21,9 @@ export default async function PostPage({ params }: PostPageProps) {
       <Link className="underline decoration-solid" href={paths.topicShow(slug)}>
         {"< "}Back to {slug}
       </Link>
-      <Post postId={postId} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Post postId={postId} />
+      </Suspense>
 
       <CommentCreateForm postId={postId} startOpen />
       <CommentList postId={postId} />
