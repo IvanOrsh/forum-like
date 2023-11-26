@@ -5,6 +5,7 @@ import paths from "@/paths";
 import Post from "@/components/posts/Post";
 import CommentCreateForm from "@/components/comments/CommentCreateForm";
 import CommentList from "@/components/comments/CommentList";
+import PostLoading from "@/components/posts/PostLoading";
 
 type PostPageProps = {
   params: {
@@ -21,7 +22,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <Link className="underline decoration-solid" href={paths.topicShow(slug)}>
         {"< "}Back to {slug}
       </Link>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PostLoading />}>
         <Post postId={postId} />
       </Suspense>
 
